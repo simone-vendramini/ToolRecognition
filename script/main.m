@@ -1,8 +1,7 @@
 close all;
 clear;
 
-im = imresize(imread("image/foto1.png"), 0.3);
-
+im = imresize(imread("../image/foto1.png"), 0.3);
 
 T = get_hue_threshold(im, 10);
 
@@ -28,6 +27,3 @@ subplot(1, 3, 2), imshow(bw_m);
 subplot(1, 3, 3), imagesc(labels), axis image, colorbar;
 
 eulerian_number = bweuler(bw_m);
-
-
-

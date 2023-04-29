@@ -20,8 +20,11 @@ se = strel('disk', 7);
 
 bw_m = imclose(bw, se);
 
+bw_m = filter_label(bw_m, 1000);
+
 labels = bwlabel(bw_m);
 
+%da modificare minimum_bounding box
 min_bbox = minimum_bounding_box(bw_m);
 proj = projections(min_bbox);
 
@@ -29,7 +32,7 @@ figure(1);
 subplot(1, 3, 1), imshow(im);
 subplot(1, 3, 2), imshow(bw_m);
 subplot(1, 3, 3), imshow(min_bbox), axis equal;
-eulerian_number = bweuler(bw_m);
+props = regionprops(min_bbox, 'all');
 
 figure(2);
 subplot(1, 2, 1), plot(proj.x);

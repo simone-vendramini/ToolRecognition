@@ -1,10 +1,9 @@
 close all;
 clear;
 
+im = imresize(imread("../image/foto6.png"), 0.3);
 
-im = imresize(imread("../image/foto1.png"), 0.3);
-
-T = get_hue_threshold(im, 10);
+T = get_hue_threshold(im, 11);
 
 im_hsv = rgb2hsv(im);
 
@@ -29,6 +28,7 @@ figure(1);
 subplot(1, 3, 1), imshow(im);
 subplot(1, 3, 2), imshow(bw_m);
 subplot(1, 3, 3), imshow(min_bbox), axis equal;
+
 eulerian_number = bweuler(bw_m);
 
 figure(2);
@@ -46,3 +46,4 @@ std_y = std(y);
 mean_x = mean(x);
 mean_y = mean(y);
 
+out = hu_moments(min_bbox);

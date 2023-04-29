@@ -8,5 +8,5 @@ function out = minimum_bounding_box(image)
 
     element = imcrop(im_oriented, [points(1), points(2), points(3), points(4)]);
 
-    out = element;
+    out= element;
 end

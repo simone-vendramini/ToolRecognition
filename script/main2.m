@@ -1,4 +1,4 @@
-im = imresize(imread("../image/foto4.png"), 0.3);
+im = imresize(imread("../image/foto1.png"), 0.3);
 
 T = get_hue_threshold(im, 10);
 
@@ -17,6 +17,8 @@ se = strel('disk', 7);
 bw_m = imclose(bw, se);
 
 labels = bwlabel(bw_m);
+
+bw_m  = filter_label(bw_m, 1000); 
 
 min_bbox = minimum_bounding_box(bw_m);
 proj = projections(min_bbox);

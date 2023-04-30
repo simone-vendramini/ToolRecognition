@@ -1,7 +1,7 @@
 close all;
 clear;
 
-im = imresize(imread("../image/foto6.png"), 0.3);
+im = imresize(imread("../image/foto1.png"), 0.3);
 
 T = get_hue_threshold(im, 11);
 

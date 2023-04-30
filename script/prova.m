@@ -2,7 +2,7 @@ close all;
 clear;
 
 im1 = imresize(imread("../image/foto1.png"), 0.3);
-im2 = imresize(imread("../image/foto6.png"), 0.3);
+im2 = imresize(imread("../image/foto2.png"), 0.3);
 
 T1 = get_hue_threshold(im1, 10);
 T2 = get_hue_threshold(im2, 10);

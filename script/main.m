@@ -2,7 +2,7 @@ close all;
 clear;
 
 
-im = imresize(imread("../image/foto1.png"), 0.3);
+im = imresize(imread("../image/foto11.png"), 0.5);
 
 T = get_hue_threshold(im, 10);
 
@@ -16,11 +16,11 @@ else
     bw = im_hsv_hue < T(1) | im_hsv_hue > T(2);
 end
 
-se = strel('disk', 7);
+se = strel('disk', 5);
 
 bw_m = imclose(bw, se);
 
-%bw_m = filter_label(bw_m, 1000);
+bw_m = filter_label(bw_m, 100);
 
 %da modificare minimum_bounding box
 min_bbox = minimum_bounding_box(bw_m);
@@ -30,8 +30,11 @@ for i = 1: size(min_bbox)
     figure();
     subplot(1, 3, 1), imshow(im);
     subplot(1, 3, 2), imshow(bw_m);
-    subplot(1, 3, 3), imshow(min_bbox{i}), axis equal;
     props = regionprops(min_bbox{i}, 'all');
+    subplot(1, 3, 3), imshow(min_bbox{i}), axis equal;
+    hold on;
+    plot(props.Centroid(:,1),props.Centroid(:,2),'b*')
+    hold off;
     
     figure();
     subplot(1, 2, 1), plot(proj.x);

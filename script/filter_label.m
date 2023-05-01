@@ -1,5 +1,5 @@
 function out = filter_label(bw, treshold)
-
+    
     labels = bwlabel(bw);
     max_label = max(max(labels));
     mask = zeros(size(bw));

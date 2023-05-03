@@ -4,7 +4,7 @@ clear;
 
 im = imresize(imread("../image/foto11.png"), 0.5);
 
-T = get_hue_threshold(im, 10);
+T = get_hue_threshold(im, 11);
 
 im_hsv = rgb2hsv(im);
 
@@ -52,3 +52,4 @@ for i = 1: size(min_bbox)
     mean_y = mean(y);
 end
 
+out = hu_moments(min_bbox);

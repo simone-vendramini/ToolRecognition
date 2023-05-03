@@ -22,7 +22,6 @@ bw_m = imclose(bw, se);
 
 bw_m = filter_label(bw_m, 100);
 
-%da modificare minimum_bounding box
 min_bbox = minimum_bounding_box(bw_m);
 for i = 1: size(min_bbox)
     proj = projections(min_bbox{i});

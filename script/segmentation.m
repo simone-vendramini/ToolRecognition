@@ -17,7 +17,5 @@ function out=segmentation(im, thresh)
     bw = imclearborder(lb, 8);
     
     se = strel('disk', 10);
-    
     out = imclose(bw, se);
-
 end

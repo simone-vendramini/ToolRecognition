@@ -1,6 +1,6 @@
-function out=segmentation(im)
+function out=segmentation(im, thresh)
 
-    T = get_hue_threshold(im, 11);
+    T = get_hue_threshold(im, thresh);
 
     im_hsv = rgb2hsv(im);
     
@@ -12,7 +12,7 @@ function out=segmentation(im)
         bw = im_hsv_hue < T(1) | im_hsv_hue > T(2);
     end
     
-    se = strel('disk', 5);
+    se = strel('disk', 10);
     
     out = imclose(bw, se);
 

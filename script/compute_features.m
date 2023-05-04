@@ -9,10 +9,12 @@ function out = compute_features(bw)
         props = regionprops(min_bbox{i}, 'all');
         proj = projections(min_bbox{i});
         
-        elem.area=props.Area;
-        elem.centroid=props.Centroid;
-        elem.euler=props.EulerNumber;
-        elem.axis=props(1).MajorAxisLength / props(1).MinorAxisLength;
+        elem.area = props.Area;
+        elem.centroid = props.Centroid;
+        elem.euler = props.EulerNumber;
+        elem.axis = props(1).MajorAxisLength / props(1).MinorAxisLength;
+        elem.fullness = (length(min_bbox{i}) * width(min_bbox{i}) - elem.area) / elem.area;
+        elem.biggest_hole = compute_biggest_hole(min_bbox{i});
         
 
         out{i} = elem;

@@ -11,6 +11,10 @@ function out=segmentation(im, thresh)
     else
         bw = im_hsv_hue < T(1) | im_hsv_hue > T(2);
     end
+
+    lb = bwlabel(bw);
+
+    bw = imclearborder(lb, 8);
     
     se = strel('disk', 10);
     

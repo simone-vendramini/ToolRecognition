@@ -11,15 +11,15 @@ function out = compute_features(bw)
         [row, cols] = size(min_bbox{i});
         
         elem.area = props.Area;
-        elem.centroid = props.Centroid;
+        elem.centroid = props.Centroid; % Da convertire in numero
         elem.euler = props.EulerNumber;
         elem.axis = props(1).MajorAxisLength / props(1).MinorAxisLength;
         elem.fullness = ((row * cols) - elem.area) ./ elem.area;
         elem.biggest_hole = compute_biggest_hole(min_bbox{i});
         
         % Prova descrittori
-        elem.hu = hu_moments(min_bbox{i});
-        elem.proj = [std(proj.x), std(proj.y)];
+        elem.hu = hu_moments(min_bbox{i}); % Da convertire in valori singoli
+        elem.proj = std(proj.x);
         elem.ap = props(1).Area ./ props(1).Perimeter;
         elem.circ = props.Circularity;
 

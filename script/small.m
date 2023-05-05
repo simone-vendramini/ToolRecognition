@@ -1,7 +1,7 @@
 close all;
 clear;
 
-[images, labels] = readlists('../image_tinta.list', '../label_tinta.list');
+[images, labels] = readlists('../image_small.list', '../label_small.list');
 
 features = cell(numel(images),1);
 
@@ -14,4 +14,4 @@ for i=1 : numel(images)
     features{i} = im_features; 
 end
 
-cv = cvpartition(labels, 'HoldOut', 0.2);
+cart = fitctree(features, labels);

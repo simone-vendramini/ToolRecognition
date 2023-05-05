@@ -2,7 +2,7 @@ close all;
 clear;
 
 
-im = imresize(imread("../image/foto11.png"), 0.5);
+im = imresize(imread("../dataset/foto_181.JPG"), 0.5);
 
 T = get_hue_threshold(im, 11);
 
@@ -15,6 +15,9 @@ if T(1) > T(2)
 else
     bw = im_hsv_hue < T(1) | im_hsv_hue > T(2);
 end
+
+lb = bwlabel(bw);
+bw = imclearborder(lb, 8);
 
 se = strel('disk', 5);
 
@@ -39,6 +42,11 @@ for i = 1: size(min_bbox)
     subplot(1, 2, 1), plot(proj.x);
     subplot(1, 2, 2), plot(proj.y);
     
+    % Calcola la trasformata di distanza dell'immagine binaria
+    dist_img = bwdist(~min_bbox{i});
+
+    % Visualizza l'immagine di distanza
+    imshow(dist_img, []);
     
     x = proj.x ./ max(proj.x);
     y = proj.y ./ max(proj.y);
@@ -52,3 +60,6 @@ for i = 1: size(min_bbox)
 end
 
 out = hu_moments(min_bbox);
+
+
+

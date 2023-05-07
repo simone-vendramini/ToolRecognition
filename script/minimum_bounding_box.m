@@ -1,6 +1,3 @@
-%regionprops va effettuata su labels e non sull'intera immagine bw
-%l'out diventerà una lista di immagini bw dei singoli oggetti nella scena
-
 function out = minimum_bounding_box(bw)
 
     labels = bwlabel(bw);

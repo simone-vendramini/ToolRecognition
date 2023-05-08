@@ -1,21 +1,17 @@
 function out=segmentation(im, thresh)
-
-    T = get_hue_threshold(im, thresh);
-
+    
     im_hsv = rgb2hsv(im);
-    
     im_hsv_hue = im_hsv(:, :, 1);
-    
-    if T(1) > T(2)
-        bw = im_hsv_hue < T(1) & im_hsv_hue > T(2);
+    im_hsv_sat = im_hsv(:, :, 2);
+
+    hist_sat = imhist(im_hsv_sat);
+
+    max_sat = find(hist_sat == max(hist_sat));
+
+    if max_sat < 250
+        out = segmentation_hue(im_hsv_hue, thresh);
     else
-        bw = im_hsv_hue < T(1) | im_hsv_hue > T(2);
+        out = segmentation_saturation(im_hsv_sat);
     end
-
-    lb = bwlabel(bw);
-
-    bw = imclearborder(lb, 8);
     
-    se = strel('disk', 10);
-    out = imclose(bw, se);
 end

@@ -13,8 +13,8 @@ for i=1 : numel(images)
 
     bw = filter_label(bw, 2500);
 
-%     figure();
-%     imshow(bw),title(['im ' int2str(i)]);
+    figure();
+    imshow(bw),title(['im ' int2str(i)]);
 
     im_features = compute_features(bw);
 

@@ -63,3 +63,4 @@ $RECYCLE.BIN/
 *.jpg
 
 # End of https://www.toptal.com/developers/gitignore/api/matlab,windows
+.MATLABDriveTag

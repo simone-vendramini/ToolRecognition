@@ -1,7 +1,7 @@
 close all;
 clear;
 
-[images, labels] = readlists('../image_tinta.list', '../label_tinta.list');
+[images, labels] = readlists('../lists/image_tinta.list', '../lists/label_tinta.list');
 
 features = cell(numel(images),1);
 

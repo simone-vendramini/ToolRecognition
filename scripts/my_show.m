@@ -1,7 +1,7 @@
 close all;
 clear;
 
-im_rgb = imread('../dataset_v2/079.JPG');
+im_rgb = imread('../dataset_v2/130.JPG');
 % im_rgb = imread('../pinza.jpg');
 im = rgb2hsv(im_rgb);
 figure();

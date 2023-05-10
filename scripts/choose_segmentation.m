@@ -2,8 +2,8 @@ function out = choose_segmentation(hist_hue, hist_sat)
     hist_hue = normalize_hist(hist_hue);
     hist_sat = normalize_hist(hist_sat);
 
-    pks_hue = findpeaks(hist_hue, 'MinPeakDistance', 20, 'MinPeakHeight', 0.03);
-    pks_sat = findpeaks(hist_sat, 'MinPeakDistance', 20, 'MinPeakHeight', 0.03);
+    pks_hue = findpeaks(hist_hue, 'MinPeakDistance', 20, 'MinPeakHeight', 0.05);
+    pks_sat = findpeaks(hist_sat, 'MinPeakDistance', 20, 'MinPeakHeight', 0.05);
 
     max_pk_hue = 0;
     max_pk_sat = 0;

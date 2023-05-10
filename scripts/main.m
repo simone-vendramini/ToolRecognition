@@ -1,61 +1,66 @@
 close all;
 clear;
 
-
-im = imresize(imread("../dataset/foto_331.JPG"), 0.5);
-
-G21=fspecial("gaussian",21,4);
-F5=fspecial("average", 30);
+im = imresize(imread("../dataset_v2/071.JPG"), 0.5);
 
 im_hsv = rgb2hsv(im);
-im_hsv_hue = im_hsv(:, :, 1);
 
+im_bin_hue = imbinarize(im_hsv(:, :, 1), 'adaptive');
+im_bin_sat = imbinarize(im_hsv(:, :, 2), 'adaptive');
 
-im=imfilter(im_hsv_hue,F5);
-
-bw = segmentation_hue(im, 13);
+bw = segmentation(im, 13);
 
 bw = filter_label(bw, 2500);
 
-figure();
-subplot(1, 2, 1), imshow(im_hsv_hue);
-subplot(1, 2, 2), imshow(bw);
+objs = compute_roi(bw, im_hsv);
 
-% min_bbox = minimum_bounding_box(bw_m);
-% for i = 1: size(min_bbox)
-%     proj = projections(min_bbox{i});
-%     
+for i = 1:numel(objs)
+    hue = objs{i}(:, :, 1);
+    sat = objs{i}(:, :, 2);
+
+    hist_hue = imhist(hue);
+    hist_sat = imhist(sat);
+
+    figure();
+    subplot(2, 2, 1), imshow(hue), title('hue');
+    subplot(2, 2, 2), plot(hist_hue), title('hue hist');
+    subplot(2, 2, 3), imshow(sat), title('sat');
+    subplot(2, 2, 4), plot(hist_sat), title('sat hist');
+
+    bin = imbinarize(sat);
+    bin_hue = segmentation_hue(hue, 15);
+
+    figure();
+    subplot(1, 2, 1), imshow(bin_hue), title('hue');
+    subplot(1, 2, 2), imshow(bin), title('sat');
+    code = choose_segmentation(hist_hue, hist_sat);
+% 
 %     figure();
 %     subplot(1, 3, 1), imshow(im);
-%     subplot(1, 3, 2), imshow(bw_m);
-%     props = regionprops(min_bbox{i}, 'all');
-%     subplot(1, 3, 3), imshow(min_bbox{i}), axis equal;
-%     hold on;
-%     plot(props.Centroid(:,1),props.Centroid(:,2),'b*')
-%     hold off;
-%     
-%     figure();
-%     subplot(1, 2, 1), plot(proj.x);
-%     subplot(1, 2, 2), plot(proj.y);
-%     
-%     % Calcola la trasformata di distanza dell'immagine binaria
-%     dist_img = bwdist(~min_bbox{i});
 % 
-%     % Visualizza l'immagine di distanza
-%     imshow(dist_img, []);
+%     if code == 1
+%         subplot(1, 3, 2), imshow(sat), title("saturation");
+%         % T = graythresh(sat);
+%         % bw2 = 1 - imbinarize(sat, T);
+%         bw2 = segmentation_saturation(sat);
+%     elseif code == 2
+%         subplot(1, 3, 2), imshow(hue), title("hue");
+%         T = graythresh(hue);
+%         bw2 = 1 - imbinarize(hue, T);
+%     else
+%         %caso in cui non vanno bene entrambi
+%     end
 %     
-%     x = proj.x ./ max(proj.x);
-%     y = proj.y ./ max(proj.y);
-%     
-%     % Calcolo stats
-%     std_x = std(x);
-%     std_y = std(y);
-%     
-%     mean_x = mean(x);
-%     mean_y = mean(y);
-% end
-% 
-% out = hu_moments(min_bbox);
+%     subplot(1, 3, 3), imshow(bw2);
+end
+
+figure();
+subplot(1, 2, 1), imshow(im_bin_hue), title('hue');
+subplot(1, 2, 2), imshow(im_bin_sat), title('sat');
+
+% figure();
+% subplot(1, 2, 1), imshow(im_hsv(:, :, 1));
+% subplot(1, 2, 2), imshow(bw);
 
 
 

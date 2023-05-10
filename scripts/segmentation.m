@@ -13,5 +13,4 @@ function out=segmentation(im, thresh)
     else
         out = segmentation_saturation(im_hsv_sat);
     end
-    
 end

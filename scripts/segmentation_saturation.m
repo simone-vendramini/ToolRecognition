@@ -1,4 +1,4 @@
-function out=segmentation_saturation(im)
+function out=segmentation_saturation(im, thresh)
     
     bw = im < 235/256;
 

@@ -1,7 +1,7 @@
 close all;
 clear;
 
-im = imresize(imread("../dataset_v2/075.JPG"), 0.5);
+im = imresize(imread("../dataset/005.JPG"), 0.5);
 
 im_hsv = rgb2hsv(im);
 

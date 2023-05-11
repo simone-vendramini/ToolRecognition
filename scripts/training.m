@@ -3,9 +3,12 @@ clear;
 
 [images, labels] = readlists('../lists/images_single.list', '../lists/labels_single.list');
 
-features = cell(numel(images),1);
+features = [];
 
 for i=1 : numel(images)
+    
+    im_features = zeros(9);
+
     im = imresize(imread(['../dataset/' images{i}]), 0.3);
     im_hsv = rgb2hsv(im);
 
@@ -15,16 +18,20 @@ for i=1 : numel(images)
     bw_h = filter_label(bw_h, 2500);
 
     bw = bw | bw_h;
-    close all;
 
-    figure();
-    imshow(bw),title(['im ' int2str(i)]);
+%     figure();
+%     imshow(bw),title(['im ' int2str(i)]);
 
-    im_features = compute_features(bw);
+    cm_features = compute_features(bw);
 
-    features{i} = im_features;
-    
-    
+    if numel(cm_features) == 1
+        im_features = cell2mat(struct2cell(cm_features{1}));
+    else
+        disp([images{i} ' segmentazione andata male']);
+    end
+
+    features = [features; im_features'];
 end
 
+save('data.mat', 'images', 'labels', "features");
 

@@ -12,9 +12,9 @@ function out = compute_features(bw)
         
         elem.area = props.Area;
         elem.centroid = double(compute_centroid(min_bbox{i}, props.Centroid));
-        elem.euler = props.EulerNumber;
+        % elem.euler = props.EulerNumber;
         elem.axis = double(props(1).MajorAxisLength / props(1).MinorAxisLength);
-        elem.fullness = double(((row * cols) - elem.area) ./ elem.area);
+        elem.fullness = double(((row * cols) - props(1).Area) ./ props(1).Area);
         elem.biggest_hole = double(compute_biggest_hole(min_bbox{i}));
         
         % Prova descrittori

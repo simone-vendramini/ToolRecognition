@@ -8,9 +8,17 @@ function out=segmentation(im, thresh)
 
     max_sat = find(hist_sat == max(hist_sat));
 
-    if max_sat < 250
-        out = segmentation_hue(im_hsv_hue, thresh);
-    else
-        out = segmentation_saturation(im_hsv_sat);
-    end
+    bw = segmentation_black_and_white(im_hsv);
+    bw = filter_label(bw, 500);
+
+    %if max_sat < 250
+
+        bw_h_s = segmentation_hue(im_hsv_hue, thresh);
+        bw_h_s = filter_label(bw_h_s, 2500);
+
+%     else
+%         bw_h_s = segmentation_saturation(im_hsv_sat, thresh);
+%     end
+
+    out = bw | bw_h_s;
 end

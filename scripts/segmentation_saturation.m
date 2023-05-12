@@ -1,6 +1,6 @@
 function out=segmentation_saturation(im, thresh)
     
-    bw = im < 235/256;
+    bw = im <  0.7 ;
 
     lb = bwlabel(bw);
     bw = imclearborder(lb, 8);

@@ -64,3 +64,5 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/matlab,windows
 .MATLABDriveTag
+
+*.mat

@@ -1,7 +1,7 @@
 function out=segmentation_hue(im, thresh)
 
-    T = get_hue_threshold(im, thresh);
-
+    % T = get_hue_threshold(im, thresh);
+    T = get_thresh(im);
     
     if T(1) > T(2)
         bw = im < T(1) & im > T(2);

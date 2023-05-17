@@ -11,7 +11,7 @@ function out = compute_features(bw)
         [row, cols] = size(min_bbox{i});
         
         elem.area = props.Area;
-        elem.centroid = double(compute_centroid(min_bbox{i}, props.Centroid));
+        elem.centroid = double(compute_centroid(min_bbox{i}, props(1).Centroid));
         % elem.euler = props.EulerNumber;
         elem.axis = double(props(1).MajorAxisLength / props(1).MinorAxisLength);
         elem.fullness = double(((row * cols) - props(1).Area) ./ props(1).Area);

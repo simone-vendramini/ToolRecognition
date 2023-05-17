@@ -16,3 +16,5 @@ show_confmat(performance_train.cm_raw, performance_train.labels);
 
 figure();
 show_confmat(performance_test.cm_raw, performance_test.labels);
+
+view(cart, "Mode","graph");

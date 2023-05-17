@@ -1,20 +1,21 @@
 close all;
 clear;
 
-[images, labels] = readlists('../lists/images_green.list', '../lists/labels_green.list');
+[images, labels] = readlists('../lists/images_blue.list', '../lists/labels_blue.list');
 
 features = [];
 
-for i=1 : numel(images)
+%for i=1 : numel(images)
+for i = 239-131 : 239-131
     
     im_features = zeros(9);
 
     im = imresize(imread(['../dataset/' images{i}]), 0.3);
 
     bw = segmentation(im, 13);
-% 
-%     figure();
-%     imshow(bw),title(['im ' int2str(i)]);
+
+    figure(1);
+    imshow(bw),title(['im ' int2str(i)]);
 
     cm_features = compute_features(bw);
 

@@ -3,7 +3,7 @@ function out = segmentation_black_and_white(image_hsv)
     v = image_hsv(:,:,3);
 
     bw_s = s < 0.374;
-    bw_v = v > 0.901 | v < 0.264;
+    bw_v = v > 0.901 | v < 0.4;
     bw = bw_s & bw_v;
 
     lb = bwlabel(bw);

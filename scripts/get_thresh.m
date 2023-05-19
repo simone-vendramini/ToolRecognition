@@ -39,8 +39,8 @@ function out = get_thresh(image)
 %             T1 = local_min_pos(index_closest - 2);
 %             T2 = local_min_pos(index_closest + 1);
 %         end
-        T1 = max_var(2) - 5;
-        T2 = min_var(2) + 5;
+        T1 = max_var(end) - 5;
+        T2 = min_var(end) + 5;
 
         if T1 > 256
             T1 = T1 - 256;

@@ -3,7 +3,7 @@ function out=segmentation(im)
     im_hsv = rgb2hsv(im);
 
     im_hsv_hue = im_hsv(:, :, 1);
-    im_hsv_sat = im_hsv(:, :, 2);
+    % im_hsv_sat = im_hsv(:, :, 2);
 
     bw_bw = segmentation_black_and_white(im_hsv);
 

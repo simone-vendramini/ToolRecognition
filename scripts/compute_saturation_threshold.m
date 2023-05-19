@@ -8,11 +8,18 @@ function out = compute_saturation_threshold(saturation_hist)
 
     norm_hist_pos = find(logic_norm_hist == 0);
 
-    T = 25;
+    norm_diff = diff(abs(norm_hist_pos - max_index));
 
-    index = abs(norm_hist_pos - max_index) <= T;
+    pos_min_diff = find(norm_diff == min(norm_diff));
+    pos_max_diff = find(norm_diff == max(norm_diff));
 
-    valori_intorno = norm_hist_pos(index);
+    if isnumeric(pos_max_diff) && isvector(pos_max_diff)
+        pos_max_diff = pos_max_diff(end);
+    end
 
-    out = [valori_intorno(1), valori_intorno(end)] ./ 256;
+    if isnumeric(pos_max_diff) && isvector(pos_max_diff)
+        pos_min_diff = pos_min_diff(1);
+    end
+
+    out = [norm_hist_pos(pos_min_diff), norm_hist_pos(pos_max_diff + 1)] ./ 256;
 end

@@ -20,7 +20,7 @@ function out = compute_features(bw)
         % Prova descrittori
         % elem.hu = hu_moments(min_bbox{i}); % Da convertire in valori singoli
         elem.proj = double(std(proj.x));
-        elem.ap = double(props(1).Area ./ props(1).Perimeter);
+        elem.ap = double(props(1).Area ./ (props(1).Perimeter)^2);
         elem.circ = props.Circularity;
 
         elem.sol = props.Solidity;

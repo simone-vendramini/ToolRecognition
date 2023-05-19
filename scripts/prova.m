@@ -1,7 +1,7 @@
 % close all;
 clear;
 
-im = imread('../dataset/342.jpg');
+im = imread('../dataset/339.JPG');
 im_hsv = rgb2hsv(im);
 
 sat_hist = imhist(im_hsv(:, :, 2));

@@ -15,6 +15,5 @@ for i=1 : numel(images)
     bw = bw | bw_h;
 
     figure();
-    imshow(bw),title(['im ' int2str(i)]);  
-    
+    imshow(bw),title(['im ' int2str(i)]);    
 end

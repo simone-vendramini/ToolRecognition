@@ -8,7 +8,7 @@ features = [];
 %for i=1 : numel(images)
 for i = 239-131 : 239-131
     
-    im_features = zeros(8);
+    im_features = zeros(9);
 
     im = imresize(imread(['../dataset/' images{i}]), 0.3);
 

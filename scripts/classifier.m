@@ -4,8 +4,6 @@ clear;
 load('train_test.mat');
 
 cart = fitctree(train.features, train.labels);
-cvmodel = crossval(cart);
-L = kfoldLoss(cvmodel)
 
 predict_train = predict(cart, train.features);
 performance_train = confmat(predict_train, train.labels);

@@ -1,24 +1,21 @@
-function out=segmentation(im, thresh)
-    
+function out=segmentation(im)
+
     im_hsv = rgb2hsv(im);
+
     im_hsv_hue = im_hsv(:, :, 1);
     im_hsv_sat = im_hsv(:, :, 2);
 
-    hist_sat = imhist(im_hsv_sat);
+    bw_bw = segmentation_black_and_white(im_hsv);
 
-    max_sat = find(hist_sat == max(hist_sat));
+    bw_bw = filter_label(bw_bw, 700);
 
-    bw = segmentation_black_and_white(im_hsv);
-    bw = filter_label(bw, 500);
+    bw_h = segmentation_hue(im_hsv_hue);
 
-    %if max_sat < 250
+    bw = bw_bw | bw_h;
 
-        bw_h_s = segmentation_hue(im_hsv_hue, thresh);
-        bw_h_s = filter_label(bw_h_s, 2500);
+    % bw_s = segmentation_saturation(im_hsv_sat);
 
-%     else
-%         bw_h_s = segmentation_saturation(im_hsv_sat, thresh);
-%     end
+    % bw = bw | bw_s;
 
-    out = bw | bw_h_s;
+    out = filter_label(bw, 2500);
 end

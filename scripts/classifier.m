@@ -18,3 +18,5 @@ figure();
 show_confmat(performance_test.cm_raw, performance_test.labels);
 
 view(cart, "Mode","graph");
+
+save('model.mat', "cart");

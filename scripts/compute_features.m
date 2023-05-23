@@ -10,7 +10,7 @@ function out = compute_features(bw)
 
         [row, cols] = size(min_bbox{i});
         
-        elem.area = props.Area;
+        % elem.area = props.Area;
         elem.centroid = double(compute_centroid(min_bbox{i}, props(1).Centroid));
         % elem.euler = props.EulerNumber;
         elem.axis = double(props(1).MajorAxisLength / props(1).MinorAxisLength);
@@ -18,7 +18,11 @@ function out = compute_features(bw)
         elem.biggest_hole = double(compute_biggest_hole(min_bbox{i}));
         
         % Prova descrittori
-        % elem.hu = hu_moments(min_bbox{i}); % Da convertire in valori singoli
+        hu = cell2mat(struct2cell(hu_moments(min_bbox{i})));
+        for j = 1: numel(hu)
+            fieldName = ['hu', num2str(j)]; 
+            elem.(fieldName) = hu(j);  
+        end
         elem.proj = double(std(proj.x));
         elem.ap = double(props(1).Area ./ (props(1).Perimeter)^2);
         elem.circ = props.Circularity;

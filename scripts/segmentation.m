@@ -17,5 +17,5 @@ function out=segmentation(im)
 
     % bw = bw | bw_s;
 
-    out = filter_label(bw, 2500);
+    out = filter_label(bw, 2000);
 end

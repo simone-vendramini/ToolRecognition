@@ -5,17 +5,17 @@ clear;
 
 features = [];
 
-for i=1 : numel(images)
-% for i=31 : 31
+%for i=1 : numel(images)
+for i=24: 24
     
-    im_features = zeros(9);
+    im_features = zeros(15);
 
     im = imresize(imread(['../dataset/' images{i}]), 0.3);
 
     bw = segmentation(im);
 
-%     figure(1);
-%     imshow(bw),title(['im ' int2str(i)]);
+    figure(1);
+    imshow(bw),title(['im ' int2str(i)]);
 
     cm_features = compute_features(bw);
 
@@ -29,4 +29,6 @@ for i=1 : numel(images)
 end
 
 save('data.mat', 'images', 'labels', "features");
+
+%   writematrix(features, 'features.csv');
 

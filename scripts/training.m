@@ -5,8 +5,8 @@ clear;
 
 features = [];
 
-%for i=1 : numel(images)
-for i=24: 24
+for i=1 : numel(images)
+%for i=24: 24
     
     im_features = zeros(15);
 

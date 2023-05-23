@@ -5,7 +5,8 @@ load('model.mat');
 
 [images, labels] = readlists('../lists/images_multiple.list', '../lists/labels_multiple.list');
 
-for i=1 : numel(images)
+%for i=1 : numel(images)
+for i = 31 : 31
     im = imresize(imread(['../dataset/' images{i}]), 0.3);
 
     bw = segmentation(im);

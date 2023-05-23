@@ -2,7 +2,15 @@ function out = get_thresh(image)
     hist = imhist(image);
     hist = cat(1,hist,hist);
 
+    tmp1=(hist(1)+hist(2)+hist(end))/3;
+
+    tmp_end=(hist(1)+hist(end-1)+hist(end))/3;
+
     hist = movmean(hist, 3);
+
+    hist(1) = tmp1;
+    hist(end) = tmp_end;
+    
     
     % Calcolo derivate
     first_der = diff(hist);

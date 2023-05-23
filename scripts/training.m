@@ -1,18 +1,18 @@
 close all;
 clear;
 
-[images, labels] = readlists('../lists/images_blue.list', '../lists/labels_blue.list');
+[images, labels] = readlists('../lists/images_green.list', '../lists/labels_green.list');
 
 features = [];
 
-%for i=1 : numel(images)
-for i = 239-131 : 239-131
+for i=1 : numel(images)
+%for i=24: 24
     
-    im_features = zeros(9);
+    im_features = zeros(15);
 
     im = imresize(imread(['../dataset/' images{i}]), 0.3);
 
-    bw = segmentation(im, 13);
+    bw = segmentation(im);
 
     figure(1);
     imshow(bw),title(['im ' int2str(i)]);
@@ -29,4 +29,6 @@ for i = 239-131 : 239-131
 end
 
 save('data.mat', 'images', 'labels', "features");
+
+%   writematrix(features, 'features.csv');
 

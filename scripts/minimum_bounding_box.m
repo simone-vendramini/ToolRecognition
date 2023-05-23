@@ -13,7 +13,7 @@ function out = minimum_bounding_box(bw)
         im_oriented = imrotate(element_n, 180-or);
         st=regionprops(im_oriented,'all');
         points = st.BoundingBox;
-        element = imcrop(im_oriented, [points(1), points(2), points(3), points(4)]);
+        element = element_n;
 
         se = strel('disk', 9);
         element = imclose(element, se);

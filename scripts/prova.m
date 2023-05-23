@@ -1,7 +1,7 @@
 % close all;
 clear;
 
-im = imread('../dataset/339.JPG');
+im = imread('../dataset/213.jpg');
 im_hsv = rgb2hsv(im);
 
 sat_hist = imhist(im_hsv(:, :, 2));
@@ -20,6 +20,10 @@ bw_h = segmentation_hue(im_hsv(:, :, 1), 0);
 
 bw = bw_s_v | bw_h;
 
+figure();
+subplot(1, 3, 1), imshow(bw_s_v);
+subplot(1, 3, 2), imshow(bw_h);
+
 bw = filter_label(bw, 3500);
 
-figure(), imshow(bw);
+subplot(1, 3, 3), imshow(bw);

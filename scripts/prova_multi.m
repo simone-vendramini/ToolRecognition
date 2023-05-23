@@ -8,7 +8,7 @@ for i=1 : numel(images)
     im_hsv = rgb2hsv(im);
 
     bw = segmentation_black_and_white(im_hsv);
-    bw_h = segmentation_hue(im_hsv(:,:,1),13);
+    bw_h = segmentation_hue(im_hsv(:,:,1));
     bw = filter_label(bw, 500);
     bw_h = filter_label(bw_h, 2500);
 

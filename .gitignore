@@ -67,3 +67,4 @@ $RECYCLE.BIN/
 
 *.mat
 confmat
+scripts/*.mat

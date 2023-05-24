@@ -1,10 +1,14 @@
-im1 = rgb2gray(imread("../images/182 crop.jpg"));
-im2 = rgb2gray(imread("../images/182.jpg"));
+close all;
+clear all;
 
-im2 = imcrop(im2, [0 0 size(im1)]);
+[images, labels] = readlists('../lists/images_multiple.list', '../lists/labels_multiple.list');
+wdt = 2604;
+hei = 3906; % (3*wdt)/ 2
 
-figure(1),
-imshow(im1');
-figure(2),
-imshow(im2);
-figure(3), imshow(im2-im1');
+for i=1 : numel(images)
+    im = imread(['../dataset/' images{i}]);
+    rotated = imrotate(im, -90);
+    cropped = imcrop(rotated, [0 0 wdt hei]);
+    path = ['../dataset/' images{i}];
+    imwrite(cropped, path);
+end

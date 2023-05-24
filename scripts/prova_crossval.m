@@ -5,7 +5,11 @@ load("data.mat");
 
 % Example: 10-fold cross-validation
 cv = cvpartition(length(images), 'KFold', 10);
-avgAcc = 0;
+avgAccTree = 0;
+avgAccEcoc = 0;
+avgAccKnn = 0;
+avgAccKmeans = 0;
+avgAccRTree = 0;
 
 for fold = 1:cv.NumTestSets
     % Get the indices of the training set for the current fold
@@ -23,8 +27,8 @@ for fold = 1:cv.NumTestSets
     test.labels = labels(testIndices);
 
     % Example: Train and evaluate a classifier (e.g., SVM)
-    tree = fitctree(train.features, train.labels);
-    y_pred = predict(tree, test.features);
+    model = fitctree(train.features, train.labels);
+    y_pred = predict(model, test.features);
     tot = 0;
 
     for i=1 : numel(test.labels)
@@ -33,8 +37,35 @@ for fold = 1:cv.NumTestSets
         end
     end
 
-    accuracy = tot / numel(test.labels);
-    avgAcc = avgAcc + accuracy;
+    avgAccTree = avgAccTree + (tot / numel(test.labels));
+
+    % ecoc
+    model = fitcecoc(train.features, train.labels);
+    y_pred = predict(model, test.features);
+    tot = 0;
+
+    for i=1 : numel(test.labels)
+        if isequal(y_pred(i), test.labels(i))
+            tot = tot + 1;
+        end
+    end
+
+    avgAccEcoc = avgAccEcoc + (tot / numel(test.labels));
+
+    % knn
+    model = fitcknn(train.features, train.labels);
+    y_pred = predict(model, test.features);
+    tot = 0;
+
+    for i=1 : numel(test.labels)
+        if isequal(y_pred(i), test.labels(i))
+            tot = tot + 1;
+        end
+    end
+
+    avgAccKnn = avgAccKnn + (tot / numel(test.labels));
 end
 
-avgAcc = avgAcc / cv.NumTestSets
+avgAccTree = avgAccTree / cv.NumTestSets
+avgAccEcoc = avgAccEcoc / cv.NumTestSets
+avgAccKnn = avgAccKnn / cv.NumTestSets

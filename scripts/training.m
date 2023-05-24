@@ -14,8 +14,8 @@ for i=1 : numel(images)
 
     bw = segmentation(im);
 
-    figure(1);
-    imshow(bw),title(['im ' int2str(i)]);
+    % figure(1);
+    % imshow(bw),title(['im ' int2str(i)]);
 
     cm_features = compute_features(bw);
 

@@ -6,7 +6,7 @@ clear;
 features = [];
 
 for i=1 : numel(images)
-%for i=24: 24
+% for i=381 - (130+130 + 30): 381 - (130+130 + 30)
     
     im_features = zeros(15);
 
@@ -30,5 +30,5 @@ end
 
 save('data.mat', 'images', 'labels', "features");
 
-%   writematrix(features, 'features.csv');
+  writematrix(features, 'features.csv');
 

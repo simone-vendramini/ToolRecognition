@@ -1,7 +1,7 @@
 close all;
-clear all;
+clear;
 
-[images, labels] = readlists('../lists/images_multiple.list', '../lists/labels_multiple.list');
+[images, labels] = readlists('../lists/images_blue.list', '../lists/labels_blue.list');
 wdt = 2604;
 hei = 3906; % (3*wdt)/ 2
 

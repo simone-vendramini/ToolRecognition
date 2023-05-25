@@ -4,7 +4,8 @@ clear;
 load("data.mat");
 
 % Example: 10-fold cross-validation
-cv = cvpartition(length(images), 'KFold', 10);
+% Leave-one-out is a special case of 'KFold' in which the number of folds equals the number of observations.
+cv = cvpartition(length(images), 'KFold', 5);
 
 train.avgAccTree = 0; train.avgAccEcoc = 0; train.avgAccKnn = 0;
 train.bestAccTree = 0; train.bestAccEcoc = 0; train.bestAccKnn = 0;
@@ -45,7 +46,7 @@ for fold = 1:cv.NumTestSets
     
     if acc > train.bestAccTree
         train.bestAccTree = acc;
-        train.bestTreeModel = predict_train;
+        train.bestTreeModel = confmat(predict_train, train.labels);
     end
 
     % test
@@ -63,7 +64,7 @@ for fold = 1:cv.NumTestSets
     
     if acc > test.bestAccTree
         test.bestAccTree = acc;
-        test.bestTreeModel = predict_test;
+        test.bestTreeModel = confmat(predict_test, test.labels);
     end
     
     %% ECOC
@@ -84,7 +85,7 @@ for fold = 1:cv.NumTestSets
 
     if acc > train.bestAccEcoc
         train.bestAccEcoc = acc;
-        train.bestEcocModel = predict_train;
+        train.bestEcocModel = confmat(predict_train, train.labels);
     end
 
     % test
@@ -102,7 +103,7 @@ for fold = 1:cv.NumTestSets
 
     if acc > test.bestAccEcoc
         test.bestAccEcoc = acc;
-        test.bestEcocModel = predict_test;
+        test.bestEcocModel = confmat(predict_test, test.labels);
     end
 
     %% KNN
@@ -123,7 +124,7 @@ for fold = 1:cv.NumTestSets
 
     if acc > train.bestAccKnn
         train.bestAccKnn = acc;
-        train.bestKnnModel = predict_train;
+        train.bestKnnModel = confmat(predict_train, train.labels);
     end
 
     % test
@@ -141,7 +142,7 @@ for fold = 1:cv.NumTestSets
 
     if acc > test.bestAccKnn
         test.bestAccKnn = acc;
-        test.bestKnnModel = predict_test;
+        test.bestKnnModel = confmat(predict_test, test.labels);
     end
 end
 
@@ -157,13 +158,13 @@ test.avgAccKnn = test.avgAccKnn / cv.NumTestSets;
 
 test
 
-performance_trainEcc = confmat(train.bestEcocModel, train.labels);
-performance_trainKnn = confmat(train.bestKnnModel, train.labels);
-performance_trainTree = confmat(train.bestTreeModel, train.labels);
+performance_trainEcc = train.bestEcocModel;
+performance_trainKnn = train.bestKnnModel;
+performance_trainTree = train.bestTreeModel;
 
-performance_testEcc = confmat(test.bestEcocModel, test.labels);
-performance_testKnn = confmat(test.bestKnnModel, test.labels);
-performance_testTree = confmat(test.bestTreeModel, test.labels);
+performance_testEcc = test.bestEcocModel;
+performance_testKnn = test.bestKnnModel;
+performance_testTree = test.bestTreeModel;
 
 subplot(2,3,1), show_confmat(performance_trainEcc.cm_raw, performance_trainEcc.labels), title("train ecc");
 subplot(2,3,2), show_confmat(performance_trainKnn.cm_raw, performance_trainKnn.labels), title("train knn");

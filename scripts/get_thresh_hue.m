@@ -2,18 +2,15 @@ function out = get_thresh_hue(image)
     hist = imhist(image);
     hist = cat(1,hist,hist);
 
-    tmp1=(hist(1)+hist(2)+hist(end))/3;
-
-    tmp_end=(hist(1)+hist(end-1)+hist(end))/3;
-
     hist = movmean(hist, 3);
 
-    hist(1) = tmp1;
-    hist(end) = tmp_end;
+    hist(1) = hist(257);
+    hist(end) = hist(256);
     
     
     % Calcolo derivate
     first_der = diff(hist);
+    first_der(end+1) = hist(1) - hist(end);
 
     % Troviamo i massimi
     max_index = find(hist==max(hist));    

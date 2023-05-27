@@ -1,12 +1,12 @@
 close all;
 clear;
 
-[images, labels] = readlists('../lists/images_red.list', '../lists/labels_red.list');
+[images, labels] = readlists('../lists/images.list', '../lists/labels.list');
 
 features = [];
 
-%for i=1 : numel(images)
-for i=381 - (130+130 + 30): 381 - (130+130 + 30)
+for i=1 : numel(images)
+%for i= 381:385
     
     im_features = zeros(15);
 

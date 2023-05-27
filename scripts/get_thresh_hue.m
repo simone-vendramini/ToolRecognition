@@ -22,8 +22,8 @@ function out = get_thresh_hue(image)
 
     if max_index(1) > 128
 
-        diff_pick1 = abs([max_der(1,:)]-max_index(1));
-        diff_pick2 = abs([max_der(2,:)]-max_index(1));
+        diff_pick1 = abs([max_der(:,1)]-max_index(1));
+        diff_pick2 = abs([max_der(:,2)]-max_index(1));
         el1 = find( diff_pick1 == min(diff_pick1));
         el2 = find( diff_pick2 == min(diff_pick2));
         max_der = [max_der(el1, 1) max_der(el2, 2)];
@@ -58,14 +58,14 @@ function out = get_thresh_hue(image)
         index = find(no_negative_2 == max(no_negative_2));
         T2 = sign_der(index(1));
 
-        if T1 > 256
-            T1 = T1 - 256;
-        end
-        if T2 > 256
-            T2 = T2 - 256;
-        end
     end
 
+    if T1 > 256
+        T1 = T1 - 256;
+    end
+    if T2 > 256
+        T2 = T2 - 256;
+    end
 
     out = [T1, T2] ./ 256;
 end

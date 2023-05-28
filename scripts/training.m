@@ -1,6 +1,6 @@
 close all;
 clear;
-
+tic
 [images, labels] = readlists('../lists/images_single.list', '../lists/labels_single.list');
 
 features = [];
@@ -8,7 +8,7 @@ features = [];
 for i=1 : numel(images)
 %for i= 71:80
     
-    im_features = zeros(1, 22);
+    im_features = zeros(15, 1);
 
     im = imresize(imread(['../dataset/' images{i}]), 0.3);
 
@@ -29,6 +29,6 @@ for i=1 : numel(images)
 end
 
 save('data.mat', 'images', 'labels', "features");
-
+toc
 %   writematrix(features, 'features.csv');
 

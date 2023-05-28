@@ -1,7 +1,7 @@
 function out=segmentation_hue(im)
-    T_der = get_thresh_hue(im);
+    T_der = get_th_hue_der(im);
     
-    T_tol = get_hue_thresh(im);
+    T_tol = get_th_hue_tol(im);
 
     if T_der(1) > T_der(2)
         bw1 = im < T_der(1) & im > T_der(2);
@@ -15,7 +15,9 @@ function out=segmentation_hue(im)
         bw2 = im < T_tol(1) | im > T_tol(2);
     end
     
+    se = strel('disk', 3);
+    bw2 = imopen(bw2, se);
+
     out = bw1 | bw2;
-%     se = strel('disk', 5);
-%     out = imopen(bw, se);
+    
 end

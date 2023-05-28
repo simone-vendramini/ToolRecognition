@@ -1,4 +1,4 @@
-function out = get_thresh_hue(image)
+function out = get_th_hue_der(image)
     hist = imhist(image);
     hist = cat(1,hist,hist);
 

@@ -1,4 +1,4 @@
-function out = get_hue_thresh(im_channel)
+function out = get_th_hue_tol(im_channel)
     
     hist = imhist(im_channel);
     hist = cat(1,hist,hist);

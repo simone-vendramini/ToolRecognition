@@ -14,10 +14,10 @@ for i=1 : numel(images)
 
     %bw = segmentation(im);
     bw = edge_segmentation(im);
+    
     figure(1);
     imshow(bw),title(['im ' int2str(i)]);
-    pause(.5)
-    close all;
+
 
 %     cm_features = compute_features(bw);
 % 

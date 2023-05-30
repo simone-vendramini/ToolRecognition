@@ -1,4 +1,4 @@
-function out = minimum_bounding_box(bw)
+function out = get_labels(bw)
 
     labels = bwlabel(bw);
 

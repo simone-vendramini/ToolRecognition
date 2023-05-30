@@ -11,7 +11,7 @@ for i = 2 : 2
 
     bw = segmentation(im);
 
-    min_bbox = minimum_bounding_box(bw);
+    min_bbox = get_labels(bw);
 
     figure();
     imshow(im), title(['im ' int2str(i)]); 

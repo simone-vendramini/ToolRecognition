@@ -1,6 +1,6 @@
 function out = compute_features(bw)
 
-    min_bbox = minimum_bounding_box(bw);
+    min_bbox = get_labels(bw);
     
     out=cell(length(min_bbox),1);
 
@@ -8,10 +8,10 @@ function out = compute_features(bw)
         props = regionprops(min_bbox{i}, 'all');
         proj = projections(min_bbox{i});
 
-        [row, cols] = size(min_bbox{i});
+        % [row, cols] = size(min_bbox{i});
         
         % elem.area = props.Area;
-        elem.centroid = double(compute_centroid(min_bbox{i}, props(1).Centroid));
+        % elem.centroid = double(compute_centroid(min_bbox{i}, props(1).Centroid));
         % elem.euler = props.EulerNumber;
         elem.axis = double(props(1).MajorAxisLength / props(1).MinorAxisLength);
         % elem.fullness = double(((row * cols) - props(1).Area) ./ props(1).Area);

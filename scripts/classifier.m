@@ -3,7 +3,7 @@ clear;
 
 load('train_test.mat');
 
-cart = fitctree(train.features, train.labels,'OptimizeHyperparameters','auto');
+cart = fitctree(train.features, train.labels);
 
 predict_train = predict(cart, train.features);
 performance_train = confmat(predict_train, train.labels);

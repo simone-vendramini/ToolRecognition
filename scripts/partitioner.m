@@ -3,7 +3,7 @@ clear;
 
 load("data.mat")
 
-cv = cvpartition(labels, "HoldOut", 0.2);
+cv = cvpartition(labels, "HoldOut", 0.3);
 
 tr = cv.training(1);
 ts = cv.test(1);

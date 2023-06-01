@@ -1,7 +1,7 @@
 close all;
 clear;
 tic
-[images, labels] = readlists('../lists/images_single.list', '../lists/labels_single.list');
+[images, labels] = readlists('../lists/images_green.list', '../lists/labels_green.list');
 
 features = [];
 

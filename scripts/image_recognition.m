@@ -3,12 +3,11 @@ clear;
 
 load('model.mat');
 
-[images, labels] = readlists('../lists/images_green.list', '../lists/labels_green.list');
+[images, labels] = readlists('../lists/images_multiple.list', '../lists/labels_green.list');
 
-%for i=1 : numel(images)
-for i = 115 : 115
-    %im = imresize(imread(['../dataset/' images{i}]), 0.3);
-    im = imresize(imread('../images/foto_sgumma.jpg'), 1);
+for i=1 : numel(images)
+%for i = 115 : 115
+    im = imresize(imread(['../dataset/' images{i}]), 0.3);
 
     bw = segmentation(im);
 
@@ -21,8 +20,13 @@ for i = 115 : 115
         cm_features = compute_features(min_bbox{j});
         cm_features = cell2mat(struct2cell(cm_features{1})).';
 
-        label = predict(cart, cm_features);
+        [label, score] = predict(cart, cm_features);
         label = replace(label, '_', ' ');
+        if max(score) <= 0.5
+            label = 'Unknown';
+        end
+
+        label = [label; ' - '; max(score)];
         bbox = regionprops(min_bbox{j}, "BoundingBox");
         rectangle('Position',bbox.BoundingBox,'EdgeColor','r', 'LineWidth',2);
         text(bbox.BoundingBox(1), bbox.BoundingBox(2), label, 'BackgroundColor', 'r', 'FontSize', 10, 'Color', 'w');

@@ -2,7 +2,7 @@ function out = compute_features(bw)
 
     min_bbox = get_labels(bw);
     
-    out=cell(length(min_bbox),1);
+    out = cell(length(min_bbox), 1);
 
     for i = 1: size(min_bbox)
         props = regionprops(min_bbox{i}, 'all');
@@ -19,15 +19,16 @@ function out = compute_features(bw)
         % elem.FilledArea = props.FilledArea;
         % elem.EquivDiameter = props.EquivDiameter;
         % elem.convexArea = props.ConvexArea;
+        % elem.ap = double(props(1).Area ./ (props(1).Perimeter)^2);
 
         % Ordine secondo features selection
         elem.axis = double(props(1).MajorAxisLength / props(1).MinorAxisLength);
         elem.sol = props.Solidity;
         elem.circ = props.Circularity;
         elem.Eccentricity = props.Eccentricity;
-        elem.spread = compute_central_moments(min_bbox{i}, 0, 2) + compute_central_moments(min_bbox{i}, 2, 0); % Non invariante per scala
+%         elem.spread = compute_central_moments(min_bbox{i}, 0, 2) + compute_central_moments(min_bbox{i}, 2, 0); % Non invariante per scala
 %         elem.projY = double(std(proj.y));
-%         elem.ap = double(props(1).Area ./ (props(1).Perimeter)^2);
+%         elem.comp = double((props(1).Perimeter)^2 ./ props(1).Area);
 %         elem.fullness = compute_fullness(min_bbox{i});
 %         elem.projX = double(std(proj.x));
         

@@ -3,7 +3,7 @@ clear;
 
 load('train_test.mat');
 
-cart = fitcknn(train.features, train.labels, 'NumNeighbors',3);
+cart = fitcknn(train.features, train.labels, 'NumNeighbors',15);
 
 predict_train = predict(cart, train.features);
 performance_train = confmat(predict_train, train.labels);

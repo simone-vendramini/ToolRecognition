@@ -4,6 +4,9 @@ clear;
 load('train_test.mat');
 
 cart = fitcknn(train.features, train.labels, 'NumNeighbors',15);
+% cart = fitcknn(train.features, train.labels, 'OptimizeHyperparameters','auto');
+
+
 
 predict_train = predict(cart, train.features);
 performance_train = confmat(predict_train, train.labels);

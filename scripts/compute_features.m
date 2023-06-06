@@ -15,7 +15,7 @@ function out = compute_features(bw)
         elem.axis = double(props(1).MajorAxisLength / props(1).MinorAxisLength);
         elem.sol = props.Solidity;
 
-        %elem.circ = props.Circularity;
+        elem.circ = props.Circularity;
 
 %         elem.projSTDY = double(std(proj.y ./ max(proj.y)));
 %         elem.projMEANY = double(mean(proj.y ./ max(proj.y)));

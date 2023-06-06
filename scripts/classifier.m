@@ -2,7 +2,7 @@ function out = classifier(type)
 
     load('train_test.mat');
     if type == "knn"
-        cart = fitcknn(train.features, train.labels, 'NumNeighbors',15);
+        cart = fitcknn(train.features, train.labels, 'NumNeighbors',15, 'Distance','mahalanobis');
     else
         cart = fitctree(train.features, train.labels);
         view(cart, "Mode","graph");

@@ -27,26 +27,26 @@ function out = compute_features(bw)
         elem.axis = double(props(1).MajorAxisLength / props(1).MinorAxisLength);
         elem.sol = props.Solidity;
 
-        elem.circ = props.Circularity;
+        %elem.circ = props.Circularity;
 
-        elem.projSTDY = double(std(proj.y ./ max(proj.y)));
-        elem.projMEANY = double(mean(proj.y ./ max(proj.y)));
+        %elem.projSTDY = double(std(proj.y ./ max(proj.y)));
+        %elem.projMEANY = double(mean(proj.y ./ max(proj.y)));
 
-        elem.projSTDX = double(std(proj.x ./ max(proj.x)));
-        elem.projMEANX = double(mean(proj.x ./ max(proj.x)));
+        %elem.projSTDX = double(std(proj.x ./ max(proj.x)));
+        %elem.projMEANX = double(mean(proj.x ./ max(proj.x)));
 
-        elem.comp = double((props(1).Perimeter)^2 ./ props(1).Area);
+        %elem.comp = double((props(1).Perimeter)^2 ./ props(1).Area);
 
         elem.fullness = compute_fullness(min_bbox{i});
         
         for j = 1: numel(hu)
-%             if j == 1 || j== 2
+             if j == 2
                 fieldName = ['hu', num2str(j)]; 
                 elem.(fieldName) = hu(j);
-%             end 
+             end 
         end
 
-        elem.Extent = props.Extent;
+        %elem.Extent = props.Extent;
         
         out{i} = elem;
 

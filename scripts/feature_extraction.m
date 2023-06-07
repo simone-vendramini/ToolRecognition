@@ -1,4 +1,4 @@
-function feature_extraction()
+function out = feature_extraction(rank)
     [images, labels] = readlists('../lists/images_single.list', '../lists/labels_single.list');
     
     features = [];
@@ -18,7 +18,7 @@ function feature_extraction()
     
         bw = segmentation(im);
     
-        cm_features = compute_features(bw);
+        cm_features = compute_features(bw, rank);
     
 %         if numel(cm_features) == 1
         im_features = cell2mat(struct2cell(cm_features{1}));
@@ -32,7 +32,11 @@ function feature_extraction()
         features = [features; im_features'];
     end
     
-    save('data.mat', 'images', 'labels', "features");
+    out.features = features;
+    out.labels = labels;
+    out.images = images;
+
+    % save('data.mat', 'images', 'labels', "features");
 
 end
 

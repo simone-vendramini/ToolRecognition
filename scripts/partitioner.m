@@ -1,6 +1,6 @@
-%function partitioner()
+function out = partitioner(features, labels, images)
 
-    load("data.mat","features","images","labels");
+    % load("data.mat","features","images","labels");
     
     cv = cvpartition(labels, "HoldOut", 0.2);
     
@@ -15,6 +15,9 @@
     test.labels = labels(ts);
     test.features = features(ts, :);
     
+    out.train = train;
+    out.test = test;
+
     save('train_test.mat', "train", "test");
 
-%end
+end

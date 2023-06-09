@@ -24,7 +24,7 @@ knnMahalanobis = fitcknn(train_knn.features, train_knn.labels, 'NumNeighbors',15
 acc_knn = model_evaluation(knnMahalanobis, train_knn, test_knn);
 
 % Tree
-cart = fitctree(train_tree.features, train_tree.labels);
+cart = fitctree(train_tree.features, train_tree.labels, "MaxNumSplits", 20);
 view(cart, "Mode","graph");
 acc_tree = model_evaluation(cart, train_tree, test_tree);
 

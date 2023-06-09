@@ -13,9 +13,11 @@ function out = feature_extraction()
             fprintf('\r');
         end
     
-    
         im = imresize(imread(['../dataset/' images{i}]), 0.3);
-    
+        
+%         F3 = fspecial("gaussian", 11, 2);
+%         im = imfilter(im, F3);
+
         bw = segmentation(im);
     
         cm_features_A = compute_features(bw, "ANOVA");

@@ -14,10 +14,10 @@ for channel = 1:size(quant, 3)
     imFilt2(:, :, channel) = medfilt2(quant(:, :, channel), [m m]);
 end
 
-figure();
-subplot(2,2,1), imshow(imFilt1), title("Guassiano");
-subplot(2,2,2), imshow(quant), title("Quantizzata");
-subplot(2,2,3), imshow(imFilt2), title("Mediano");
+% figure();
+% subplot(2,2,1), imshow(imFilt1), title("Guassiano");
+% subplot(2,2,2), imshow(quant), title("Quantizzata");
+% subplot(2,2,3), imshow(imFilt2), title("Mediano");
 
 out = imFilt2;
 end
@@ -25,7 +25,7 @@ end
 
 function res = my_quantization(inImg)
 %Number of colors to be present in the output
-noOfColors = 16;
+noOfColors = 20;
 
 % inImg = im_preprocess("../dataset/011.JPG");
 % inImg = imresize(imread("../dataset/011.JPG"), 0.3);

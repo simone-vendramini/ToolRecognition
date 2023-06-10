@@ -31,16 +31,16 @@ save("multi_classifier.mat", "knnMahalanobis", "cart");
 
 function out = model_evaluation(classifier, train, test)
     predict_train = predict(classifier, train.features);
-    performance_train = confmat(predict_train, train.labels);
+    performance_train = confmat(train.labels, predict_train);
     
     predict_test = predict(classifier, test.features);
-    performance_test = confmat(predict_test, test.labels);
+    performance_test = confmat(test.labels, predict_test);
     
     figure();
-    show_confmat(performance_train.cm_raw, performance_train.labels);
+    show_confmat(performance_train.cm_raw, performance_train.labels), title("Train");
     
     figure();
-    show_confmat(performance_test.cm_raw, performance_test.labels);
+    show_confmat(performance_test.cm_raw, performance_test.labels), title("Test");
     
     out = [performance_train.accuracy performance_test.accuracy];
 end

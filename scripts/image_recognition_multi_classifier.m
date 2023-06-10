@@ -3,21 +3,28 @@ clear;
 
 load('multi_classifier.mat');
 
-[images, labels] = readlists('../lists/images_multiple.list', '../lists/labels_green.list');
+[images, labels] = readlists('../lists/images_multiple.list', '../lists/labels_multiple.list');
 
-for i=1 : numel(images)
+pred_labels = [];
+% for i=1 : numel(images)
+for i=80:80
     im = imresize(imread(['../dataset/' images{i}]), 0.3);
     
-    im = im_preprocess(im, 11);
+    im_F = im_preprocess(im, 11);
 
-    bw = segmentation(im);
+    bw = segmentation(im_F);
 
     min_bbox = get_labels(bw);
 
     figure();
     imshow(im), title(['im ' int2str(i)]); 
     hold on;
+    figure();
+    imshow(im_F), title(['im ' int2str(i)]); 
+    hold on;
 
+    
+    labels_im = "";
     for j = 1 :numel(min_bbox)
         cm_features_A = compute_features(min_bbox{j}, "ANOVA");
         cm_features_A = cell2mat(struct2cell(cm_features_A{1})).';
@@ -38,9 +45,11 @@ for i=1 : numel(images)
         if (score(1) - score(2)) <= 0.2 || score(1) <= 0.55
             label = 'Unknown';
         end
+
+        labels_im = labels_im+","+ label;
         
         if score(1) < 1
-            label = label + " "  + string((score(1) * 100)) + "%";
+            label = label + " "  + string(round(score(1) * 100)) + "%";
         end
 
         % Visualizzazione
@@ -48,6 +57,12 @@ for i=1 : numel(images)
         rectangle('Position',bbox.BoundingBox,'EdgeColor','r', 'LineWidth',2);
         text(bbox.BoundingBox(1), bbox.BoundingBox(2), label, 'BackgroundColor', 'r', 'FontSize', 10, 'Color', 'w');
     end
+    if labels_im == ""
+        labels_im = "-";
+    end
+
+    pred_labels = [pred_labels, labels_im];
 
     hold off;
 end
+pred_labels = pred_labels';

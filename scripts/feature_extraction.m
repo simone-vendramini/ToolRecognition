@@ -13,9 +13,7 @@ function out = feature_extraction()
             fprintf('\r');
         end
     
-        im = imresize(imread(['../dataset/' images{i}]), 0.3);
-        
-        im = im_preprocess(im, 11);
+        im = im_preprocess(['../dataset/' images{i}]);
 
         bw = segmentation(im);
     

@@ -8,8 +8,8 @@ load('model_knn.mat');
 
 % for i=1 : numel(images)
 for i = 115 : 115
-    %im = imresize(imread(['../dataset/' images{i}]), 0.3);
-    im = imresize(imread("../dataset/284.jpg"), 0.3);
+    %im = im_preprocess(['../dataset/' images{i}]);
+    im = im_preprocess("../dataset/284.jpg");
 
     bw = segmentation(im);
 

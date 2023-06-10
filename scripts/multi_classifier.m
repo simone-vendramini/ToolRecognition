@@ -18,12 +18,11 @@ train_test_split = partitioner(features_tree, labels, images);
 train_tree = train_test_split.train;
 test_tree = train_test_split.test;
 %% Creazione del modello
-% load("train_test.mat");
 % KNN (15, mahalanobis)
 knnMahalanobis = fitcknn(train_knn.features, train_knn.labels, 'NumNeighbors',15, 'Distance','mahalanobis');
 acc_knn = model_evaluation(knnMahalanobis, train_knn, test_knn);
 
-% Tree
+% Tree ("MaxNumSplits", 20)
 cart = fitctree(train_tree.features, train_tree.labels, "MaxNumSplits", 20);
 view(cart, "Mode","graph");
 acc_tree = model_evaluation(cart, train_tree, test_tree);

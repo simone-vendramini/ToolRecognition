@@ -1,4 +1,3 @@
-
 function out=confmat(gt,predicted)
 
   [cm_raw,order]=confusionmat(gt(:),predicted(:));

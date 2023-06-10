@@ -8,11 +8,6 @@ function out = get_labels(bw)
     for n = 1 : max_label
         element_n = (labels==n);
 
-        orStruct = regionprops(element_n,'Orientation');
-        or = orStruct.Orientation;
-        im_oriented = imrotate(element_n, 180-or);
-        st=regionprops(im_oriented,'all');
-        points = st.BoundingBox;
         element = element_n;
 
         se = strel('disk', 9);

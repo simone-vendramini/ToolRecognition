@@ -9,14 +9,10 @@ function out = compute_features(bw, rank)
         proj = projections(min_bbox{i});
         hu = cell2mat(struct2cell(hu_moments(min_bbox{i})));
 
-        % ANOVA = 1 - 11 - 10 - 2 - 3 - 7 
-        % MRMR = 1 - 16 - 15 - 6 - 5 - 9
-        % Ordine secondo features selection
         if rank == "ANOVA"
             elem.axis = double(props(1).MajorAxisLength / props(1).MinorAxisLength);
             elem.sol = props.Solidity;
             elem.circ = props.Circularity;
-
             elem.projMEANX = double(mean(proj.x ./ max(proj.x)));
             for j = 1: numel(hu)
                 if j == 1 || j== 2

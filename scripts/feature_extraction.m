@@ -15,8 +15,7 @@ function out = feature_extraction()
     
         im = imresize(imread(['../dataset/' images{i}]), 0.3);
         
-%         F3 = fspecial("gaussian", 11, 2);
-%         im = imfilter(im, F3);
+        im = im_preprocess(im, 11);
 
         bw = segmentation(im);
     
@@ -35,8 +34,6 @@ function out = feature_extraction()
     out.features_MRMR = features_M;
     out.labels = labels;
     out.images = images;
-
-    % save('data.mat', 'images', 'labels', "features");
 
 end
 

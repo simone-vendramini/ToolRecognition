@@ -1,4 +1,4 @@
-% close all;
+close all;
 clear;
 
 load('multi_classifier.mat');
@@ -7,6 +7,8 @@ load('multi_classifier.mat');
 
 for i=1 : numel(images)
     im = imresize(imread(['../dataset/' images{i}]), 0.3);
+    
+    im = im_preprocess(im, 11);
 
     bw = segmentation(im);
 
@@ -27,7 +29,7 @@ for i=1 : numel(images)
         [label_K, score_K] = predict(knnMahalanobis, cm_features_A);
 
         
-        score = (score_T + score_K) / 2;
+        score = (score_T * 0.2 + score_K * 0.8);
         
         label = cart.ClassNames(find(score == max(score)));
         

@@ -1,8 +1,8 @@
-function out = im_preprocess(path)
+function out = im_preprocess(path, n)
 im = imresize(imread(path), 0.3);
 
 
-n = 5; m = 5;
+m = 5;
 sigma = ceil((n-1)/5);
 gaussFilt = fspecial("gaussian", [n n], sigma);
 

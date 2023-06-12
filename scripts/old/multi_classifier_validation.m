@@ -14,10 +14,6 @@ for i=1 : numel(images)
 
     min_bbox = get_labels(bw);
 
-%     figure();
-%     imshow(im), title(['im ' int2str(i)]); 
-%     hold on;
-
     cm_features_A = compute_features(min_bbox{1}, "ANOVA");
     cm_features_A = cell2mat(struct2cell(cm_features_A{1})).';
 
@@ -28,7 +24,7 @@ for i=1 : numel(images)
     [label_K, score_K] = predict(knnMahalanobis, cm_features_A);
 
         
-    score = (score_T + score_K) / 2;
+    score = (score_T * 0.2 + score_K * 0.8);
         
     label = cart.ClassNames(find(score == max(score)));
 
@@ -39,18 +35,6 @@ for i=1 : numel(images)
         label = 'Unknown';
     end
     
-%     label = replace(label, '_', ' ');
-% 
-%     if score(1) < 1
-%         label = label + " "  + string((score(1) * 100)) + "%";
-%     end
-% 
-%     % Visualizzazione
-%     bbox = regionprops(min_bbox{1}, "BoundingBox");
-%     rectangle('Position',bbox.BoundingBox,'EdgeColor','r', 'LineWidth',2);
-%     text(bbox.BoundingBox(1), bbox.BoundingBox(2), label, 'BackgroundColor', 'r', 'FontSize', 10, 'Color', 'w');
-
-%     hold off;
 end
 
 performance_test = confmat(predict_labels, labels);

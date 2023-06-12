@@ -7,11 +7,11 @@ sigma = ceil((n-1)/5);
 gaussFilt = fspecial("gaussian", [n n], sigma);
 
 imFilt1 = imfilter(im, gaussFilt);
-quant = my_quantization(imFilt1);
+% quant = my_quantization(imFilt1);
 
-imFilt2 = quant;
-for channel = 1:size(quant, 3)
-    imFilt2(:, :, channel) = medfilt2(quant(:, :, channel), [m m]);
+imFilt2 = imFilt1;
+for channel = 1:size(imFilt1, 3)
+    imFilt2(:, :, channel) = medfilt2(imFilt1(:, :, channel), [m m]);
 end
 
 % figure();

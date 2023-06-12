@@ -6,7 +6,7 @@ load('multi_classifier.mat');
 [images, labels] = readlists('../lists/images_multiple.list', '../lists/labels_green.list');
 
 for i=1 : numel(images)
-    im = imresize(imread(['../dataset/' images{i}]), 0.3);
+    im = im_preprocess(['../dataset/' images{i}], 11);
 
     bw = segmentation(im);
 

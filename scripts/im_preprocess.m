@@ -1,25 +1,25 @@
-function out = im_preprocess(path)
+function out = im_preprocess(path, n)
 im = imresize(imread(path), 0.3);
 
-
-n = 5; m = 5;
+m = 5;
 sigma = ceil((n-1)/5);
 gaussFilt = fspecial("gaussian", [n n], sigma);
 
-imFilt1 = imfilter(im, gaussFilt);
-% quant = my_quantization(imFilt1);
+% imFilt1 = imfilter(im, gaussFilt);
+% imFilt1 = my_quantization(imFilt1);
+[imFilt1,map] = rgb2ind(im,64);
 
 imFilt2 = imFilt1;
-for channel = 1:size(imFilt1, 3)
-    imFilt2(:, :, channel) = medfilt2(imFilt1(:, :, channel), [m m]);
+for channel = 1:size(imFilt2, 3)
+    imFilt2(:, :, channel) = medfilt2(imFilt2(:, :, channel), [m m]);
 end
 
 % figure();
 % subplot(2,2,1), imshow(imFilt1), title("Guassiano");
 % subplot(2,2,2), imshow(quant), title("Quantizzata");
 % subplot(2,2,3), imshow(imFilt2), title("Mediano");
-
-out = imFilt2;
+out = ind2rgb(imFilt2, map);
+% out = imFilt2;
 end
 
 

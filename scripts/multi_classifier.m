@@ -1,6 +1,6 @@
 close all;
 clear;
-
+tic;
 %% Segmentazione ed estrazione features
 data = feature_extraction();
 features_knn = data.features_ANOVA;
@@ -29,7 +29,7 @@ view(cart, "Mode","graph");
 acc_tree = model_evaluation(cart, train_tree, test_tree, "Tree");
 
 save("multi_classifier.mat", "knnMahalanobis", "cart");
-
+toc;
 function out = model_evaluation(classifier, train, test, name)
     predict_train = predict(classifier, train.features);
     performance_train = confmat(predict_train, train.labels);

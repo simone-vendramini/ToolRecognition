@@ -14,3 +14,5 @@ Simone Vendramini,
 Tommaso Ferrario,
 Francesco Iaia,
 Davide Borzì
+
+![alt text](https://github.com/Svendra4UniMiB/ToolsRecognition/blob/main/im_relazione/mokina.png)

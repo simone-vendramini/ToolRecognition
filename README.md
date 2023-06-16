@@ -16,3 +16,9 @@ Francesco Iaia,
 Davide Borzì
 
 ![alt text](https://github.com/Svendra4UniMiB/ToolsRecognition/blob/main/im_relazione/mokina.png)
+
+### How to run code
+- Scaricare cartella script, list e Dataset
+- Nella cartella script eseguire il file [Multi Classifier](scripts/multi_classifier.m) per creare un modello
+(è già presente un modello pre-trainato chiamato multi_classifier.mat)
+- Per eseguire il modello su immagini multiple bisogna far partire [Imaga recognition multi classifier](scripts/image_recognition_multi_classifier.m)

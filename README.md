@@ -1,4 +1,4 @@
-# Tools Recognition
+# Tool Recognition
 Applicazione che, data una immagine permetta di riconoscere un set di utensili meccanici posizionati su un piano
 
 Sono state fatte delle assunzioni iniziali relative allo sfondo. In particolare esso deve: 
